@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=False
+Exec=tvcc-televinken-logout
+Name=Logout
+Comment=Logout
+Icon=/usr/share/icons/Humanity/actions/48/gnome-logout.svg
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#includes
+source /usr/local/bin/tvcc/lib/functions
+
+reboot_televinken

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function check_idle {
+
+if [[ $(xprintidle) -lt 10000 ]];
+ then touch /tmp/.tvlock
+elif [[ $(xprintidle) -gt 100000 ]];
+ then rm /tmp/.tvlock
+fi
+
+}
+
+while true; do
+check_idle
+sleep 1
+done
+

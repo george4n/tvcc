@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source /usr/local/bin/tvcc/lib/functions
+
+set_logon_script_kundservice
+
+gsettings set com.canonical.Unity.Launcher favorites "[
+'application://nautilus-home.desktop',
+'application://google-chrome.desktop',
+'application:///mnt/.system/kundservice/admin/client/remote.desktop',
+'application://gnome-calculator.desktop',
+'application://xpad.desktop',
+'application://bria.desktop',
+'unity://running-apps',
+'application:///usr/local/bin/tvcc/share/3kundservice/shortcuts/3kundservice-assistance.desktop',
+'application:///usr/local/bin/tvcc/share/3kundservice/shortcuts/3kundservice-control-center.desktop',
+'application:///usr/local/bin/tvcc/share/3kundservice/shortcuts/3kundservice-logout.desktop',
+'application:///usr/local/bin/tvcc/share/3kundservice/shortcuts/3kundservice-reboot.desktop',
+'unity://expo-icon',
+'unity://devices']"
+
+zenity --info --text "Your software has been updated to the latest version!" --timeout 5

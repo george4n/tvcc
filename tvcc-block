@@ -1,0 +1,28 @@
+#!/bin/bash
+
+TVCCGROUP=$(id -g $(whoami))
+
+function 3telesales_block {
+
+H=$(date +%H)
+if (( $H >= 9 && $H < 13 )); then
+    zenity --info --text "You cannot run this program at this time" --timeout 5
+elif (( $H >= 13 & $H < 17 )); then
+        zenity --info --text "You can run the program" --timeout 2
+        firefox
+elif (( $H >= 17 && $H < 21 )); then
+    zenity --info --text "You cannot run this program at this time" --timeout 5
+else
+        zenity --info --text "You can run the program" --timeout 2
+        firefox
+fi
+
+}
+
+
+if [ $TVCCGROUP = "502" ]; then
+        3telesales_block
+else
+        zenity --info --text "You can run the program" --timeout 2
+        firefox
+fi

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+source /usr/local/bin/tvcc/lib/functions
+
+login_3savedesk
+
+echo hello
+exit 0

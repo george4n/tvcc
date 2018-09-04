@@ -1,0 +1,6 @@
+#!/bin/bash
+
+while true; do
+	aplay /usr/local/bin/tvcc/share/global/click.wav
+	sleep 1
+done

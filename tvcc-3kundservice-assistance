@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source /usr/local/bin/tvcc/lib/functions
+
+assistance_3kundservice
+

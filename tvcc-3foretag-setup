@@ -1,0 +1,25 @@
+#!/bin/bash
+
+source /usr/local/bin/tvcc/lib/functions
+
+set_logon_script_foretag
+
+gsettings set com.canonical.Unity.Launcher favorites "[
+'application://nautilus-home.desktop',
+'application://google-chrome.desktop',
+'application://firefox.desktop',
+'application:///mnt/.system/foretag/admin/client/remote.desktop',
+'application://virtualbox.desktop',
+'application://bria.desktop',
+'application://gnome-calculator.desktop',
+'application://xpad.desktop',
+'application://slack.desktop',
+'unity://running-apps',
+'application:///usr/local/bin/tvcc/share/3foretag/shortcuts/3foretag-assistance.desktop',
+'application:///usr/local/bin/tvcc/share/3foretag/shortcuts/3foretag-control-center.desktop',
+'application:///usr/local/bin/tvcc/share/3foretag/shortcuts/3foretag-logout.desktop',
+'application:///usr/local/bin/tvcc/share/3foretag/shortcuts/3foretag-reboot.desktop',
+'unity://expo-icon',
+'unity://devices']"
+
+zenity --info --text "Your software has been updated to the latest version!" --timeout 5

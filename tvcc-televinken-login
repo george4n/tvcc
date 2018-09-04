@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+tvcc-idle &
+source /usr/local/bin/tvcc/lib/functions
+
+login_televinken

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source /usr/local/bin/tvcc/lib/functions
+
+force_logout_televinken

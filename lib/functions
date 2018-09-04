@@ -1,0 +1,1044 @@
+#!/bin/bash
+
+source /usr/local/bin/tvcc/lib/functions-logout
+source /usr/local/bin/tvcc/lib/functions-login
+
+
+
+#######################################
+#           CONTROL CENTER
+#######################################
+
+
+function control_center_3foretag {
+
+CHOICE=$(zenity --height=400 --width=360 --list \
+   --title="Televinken Control Center" \
+   --column="Task" --column="Description" \
+    "1" "Logout Session" \
+    "2" "Restart Bria" \
+    "3" "Restore Bria Settings" \
+    "4" "Refresh Logon Process" \
+    "5" "Kill Remote" \
+    "6" "Beta - Restore VM Configuration" \
+    "7" "Refresh Sound System" \
+    "8" "Download Remote Settings" \
+    "9" "Headset Keepalive" \
+
+)
+
+if [[ $CHOICE = "1" ]]; then tvcc-3foretag-logout &
+elif [[ $CHOICE = "2" ]]; then fixbria &
+elif [[ $CHOICE = "3" ]]; then restore_bria &
+elif [[ $CHOICE = "4" ]]; then tvcc-3foretag-login &
+elif [[ $CHOICE = "5" ]]; then killall rdesktop &
+elif [[ $CHOICE = "6" ]]; then /mnt/.system/foretag/admin/server/./restorevmconf.sh &
+elif [[ $CHOICE = "7" ]]; then /mnt/.system/foretag/admin/server/./fixpulse.sh &
+elif [[ $CHOICE = "8" ]]; then download_remote_settings &
+elif [[ $CHOICE = "9" ]]; then gnome-terminal -e 'tvcc-click'
+exit
+fi
+
+}
+
+
+function control_center_3kundservice {
+
+CHOICE=$(zenity --height=400 --width=360 --list \
+   --title="Televinken Control Center" \
+   --column="Task" --column="Description" \
+   "1" "Logout Session" \
+   "2" "Refresh Logon Process" \
+   "3" "Kill Remote" \
+   "4" "Remote Legacy" \
+   "5" "Refresh Sound System" \
+   "6" "Download Remote Settings" \
+   "7" "Remote Temp" \
+)
+
+if [[ $CHOICE = "1" ]]; then tvcc-3kundservice-logout &
+elif [[ $CHOICE = "2" ]]; then tvcc-3kundservice-logon &
+elif [[ $CHOICE = "3" ]]; then killall rdesktop &
+elif [[ $CHOICE = "4" ]]; then /mnt/.system/kundservice/admin/server/./remote-legacy.sh &
+elif [[ $CHOICE = "5" ]]; then /mnt/.system/kundservice/admin/server/./fixpulse.sh &
+elif [[ $CHOICE = "6" ]]; then /mnt/.system/kundservice/admin/server/./remote-settings.sh &
+elif [[ $CHOICE = "7" ]]; then /mnt/.system/kundservice/admin/server/./remote-temp.sh &
+
+fi
+
+}
+
+function control_center_3savedesk {
+
+CHOICE=$(zenity --height=400 --width=360 --list \
+   --title="Televinken Control Center" \
+   --column="Task" --column="Description" \
+   "1" "Logout Session" \
+   "2" "Refresh Logon Process" \
+   "3" "Kill Remote" \
+   "4" "Remote Legacy" \
+   "5" "Refresh Sound System" \
+   "6" "Download Remote Settings" \
+
+)
+
+if [[ $CHOICE = "1" ]]; then tvcc-3savedesk-logout &
+elif [[ $CHOICE = "2" ]]; then tvcc-3savedesk-logon &
+elif [[ $CHOICE = "3" ]]; then killall rdesktop &
+elif [[ $CHOICE = "4" ]]; then /mnt/.system/kundservice/admin/server/./remote-legacy.sh &
+elif [[ $CHOICE = "5" ]]; then /mnt/.system/kundservice/admin/server/./fixpulse.sh &
+elif [[ $CHOICE = "6" ]]; then /mnt/.system/kundservice/admin/server/./remote-settings.sh &
+
+
+fi
+
+}
+
+
+function control_center_3telesales {
+
+CHOICE=$(zenity --height=400 --width=360 --list \
+   --title="Televinken Control Center" \
+   --column="Task" --column="Description" \
+   "1" "Logout Session" \
+   "2" "Restart Bria" \
+   "3" "Restore Bria Settings" \
+   "4" "Refresh Logon Process" \
+   "5" "Kill Remote" \
+   "6" "Remote Legacy" \
+   "7" "Refresh Sound System" \
+   "8" "Download Remote Settings" \
+   "9" "Remote Temp" \
+   "10" "Headset Keepalive" \
+)
+
+if [[ $CHOICE = "1" ]]; then tvcc-3kundservice-logout &
+elif [[ $CHOICE = "2" ]]; then fixbria &
+elif [[ $CHOICE = "3" ]]; then restore_bria &
+elif [[ $CHOICE = "4" ]]; then tvcc-3kundservice-logon &
+elif [[ $CHOICE = "5" ]]; then killall rdesktop &
+elif [[ $CHOICE = "6" ]]; then /mnt/.system/kundservice/admin/server/./remote-legacy.sh &
+elif [[ $CHOICE = "7" ]]; then /mnt/.system/kundservice/admin/server/./fixpulse.sh &
+elif [[ $CHOICE = "8" ]]; then /mnt/.system/kundservice/admin/server/./remote-settings.sh &
+elif [[ $CHOICE = "9" ]]; then /mnt/.system/kundservice/admin/server/./remote-temp.sh &
+elif [[ $CHOICE = "10" ]]; then gnome-terminal -e 'tvcc-click'
+fi
+
+}
+
+function control_center_televinken {
+
+CHOICE=$(zenity --height=400 --width=460 --list \
+   --title="Televinken Control Center" \
+   --column="Task" --column="Description" \
+    "1" "Logout Session" \
+    "2" "Refresh Logon Process" \
+    "3" "Check Latency Dialing" \
+    "4" "Restart Sound System" \
+    "5" "Headset Keepalive" \
+)
+
+if [[ $CHOICE = "1" ]]; then tvcc-televinken-logout &
+elif [[ $CHOICE = "2" ]]; then tvcc-televinken-login &
+elif [[ $CHOICE = "3" ]]; then gnome-terminal --geometry=800x800 -e "mtr tv.dialingozone.com" &
+elif [[ $CHOICE = "4" ]]; then pulse_restart &
+elif [[ $CHOICE = "5" ]]; then gnome-terminal -e 'tvcc-click'
+fi
+
+}
+
+
+#######################################
+#             ASSISTANCE
+#######################################
+
+
+function assistance_televinken {
+
+zenity --question --title "Request for Assistance" --no-wrap --text "Do you want to notify the IT Department at Televinken for Assistance? \n\nPlease be aware that support is only available\:
+\nMonday to Friday from 09\:00 until 18\:00."
+  if [[ $? = 1 ]]; then
+    zenity --info --width=50 --title "Request Status" --text "\nRequest has been cancelled!" --no-wrap --timeout=5 && exit
+  else
+    szAnswer=$(zenity --entry --text "What seems to be the problem?" --entry-text "");
+    if [[ $szAnswer < 1 ]]; then
+      zenity --info --width=50 --title "Request Status" --text "\nRequest has NOT been sent! \n\nPlease state your issue and try again." --no-wrap --timeout=5 && exit
+    else
+      echo "assistance needed by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER) on $HOSTNAME. ***$szAnswer***" | tvcc-televinken-slacktee -p -c assistance -a danger
+      zenity --info --width=50 --title "Request Status" --text "\nRequest has been sent! \n\nPlease allow up to 10 minutes for a response." --no-wrap --timeout=5
+    fi
+fi
+
+}
+
+function assistance_3foretag {
+
+zenity --question --title "Request for Assistance" --no-wrap --text "Do you want to notify the IT Department at Televinken for Assistance? \n\nPlease be aware that support is only available\:
+\nMonday to Friday from 09\:00 until 18\:00."
+  if [[ $? = 1 ]]; then
+    zenity --info --width=50 --title "Request Status" --text "\nRequest has been cancelled!" --no-wrap --timeout=5 && exit
+  else
+    szAnswer=$(zenity --entry --text "What seems to be the problem?" --entry-text "");
+    if [[ $szAnswer < 1 ]]; then
+      zenity --info --width=50 --title "Request Status" --text "\nRequest has NOT been sent! \n\nPlease state your issue and try again." --no-wrap --timeout=5 && exit
+    else
+      echo "assistance needed by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER) on $HOSTNAME. ***$szAnswer***" | tvcc-3foretag-slacktee -p -c assistance -a danger
+      zenity --info --width=50 --title "Request Status" --text "\nRequest has been sent! \n\nPlease allow up to 10 minutes for a response." --no-wrap --timeout=5
+    fi
+fi
+
+}
+
+function assistance_3telesales {
+
+zenity --question --title "Request for Assistance" --no-wrap --text "Do you want to notify the IT Department at Televinken for Assistance? \n\nPlease be aware that support is only available\:
+\nMonday to Friday from 09\:00 until 18\:00."
+  if [[ $? = 1 ]]; then
+    zenity --info --width=50 --title "Request Status" --text "\nRequest has been cancelled!" --no-wrap --timeout=5 && exit
+  else
+    szAnswer=$(zenity --entry --text "What seems to be the problem?" --entry-text "");
+    if [[ $szAnswer < 1 ]]; then
+      zenity --info --width=50 --title "Request Status" --text "\nRequest has NOT been sent! \n\nPlease state your issue and try again." --no-wrap --timeout=5 && exit
+    else
+      echo "assistance needed by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER) on $HOSTNAME. ***$szAnswer***" | tvcc-3telesales-slacktee -p -c assistance -a danger
+      zenity --info --width=50 --title "Request Status" --text "\nRequest has been sent! \n\nPlease allow up to 10 minutes for a response." --no-wrap --timeout=5
+    fi
+fi
+
+}
+
+function assistance_3kundservice {
+
+zenity --question --title "Request for Assistance" --no-wrap --text "Do you want to notify the IT Department at Televinken for Assistance? \n\nPlease be aware that support is only available\:
+\nMonday to Friday from 09\:00 until 18\:00."
+  if [[ $? = 1 ]]; then
+    zenity --info --width=50 --title "Request Status" --text "\nRequest has been cancelled!" --no-wrap --timeout=5 && exit
+  else
+    szAnswer=$(zenity --entry --text "What seems to be the problem?" --entry-text "");
+    if [[ $szAnswer < 1 ]]; then
+      zenity --info --width=50 --title "Request Status" --text "\nRequest has NOT been sent! \n\nPlease state your issue and try again." --no-wrap --timeout=5 && exit
+    else
+      echo "assistance needed by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER) on $HOSTNAME. ***$szAnswer***" | tvcc-3kundservice-slacktee -p -c assistance -a danger
+      zenity --info --width=50 --title "Request Status" --text "\nRequest has been sent! \n\nPlease allow up to 10 minutes for a response." --no-wrap --timeout=5
+    fi
+fi
+
+}
+
+function assistance_3savedesk {
+
+zenity --question --title "Request for Assistance" --no-wrap --text "Do you want to notify the IT Department at Televinken for Assistance? \n\nPlease be aware that support is only available\:
+\nMonday to Friday from 09\:00 until 18\:00."
+  if [[ $? = 1 ]]; then
+    zenity --info --width=50 --title "Request Status" --text "\nRequest has been cancelled!" --no-wrap --timeout=5 && exit
+  else
+    szAnswer=$(zenity --entry --text "What seems to be the problem?" --entry-text "");
+    if [[ $szAnswer < 1 ]]; then
+      zenity --info --width=50 --title "Request Status" --text "\nRequest has NOT been sent! \n\nPlease state your issue and try again." --no-wrap --timeout=5 && exit
+    else
+      echo "assistance needed by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER) on $HOSTNAME. ***$szAnswer***" | tvcc-3savedesk-slacktee -p -c assistance -a danger
+      zenity --info --width=50 --title "Request Status" --text "\nRequest has been sent! \n\nPlease allow up to 10 minutes for a response." --no-wrap --timeout=5
+    fi
+fi
+
+}
+
+
+#######################################
+#          LOGON FUNCTIONS
+#######################################
+
+
+
+function slacktee_logon_kundservice {
+  echo "$HOSTNAME logon session by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER)" | tvcc-3kundservice-slacktee -c log -p -a good
+}
+function slacktee_logout_kundservice {
+  echo "$HOSTNAME logout session by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER)" | tvcc-3kundservice-slacktee -c log -p -a good
+}
+function slacktee_logon_3savedesk {
+  echo "$HOSTNAME logon session by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER)" | tvcc-3savedesk-slacktee -c log -p -a good
+}
+function slacktee_logout_3savedesk {
+  echo "$HOSTNAME logout session by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER)" | tvcc-3savedesk-slacktee -c log -p -a good
+}
+function slacktee_logon_foretag {
+  echo "$HOSTNAME logon session by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER)" | tvcc-3foretag-slacktee -c log -p -a good
+}
+function slacktee_logout_foretag {
+  echo "$HOSTNAME logout session by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER)" | tvcc-3foretag-slacktee -c log -p -a good
+}
+function slacktee_logon_telesales {
+  echo "$HOSTNAME logon session by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER)" | tvcc-3telesales-slacktee -c log -p -a good
+}
+function slacktee_logout_telesales {
+  echo "$HOSTNAME logout session by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER)" | tvcc-3telesales-slacktee -c log -p -a good
+}
+function slacktee_logon_televinken {
+  echo "$HOSTNAME logon session by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER)" | tvcc-televinken-slacktee -c log -p -a good
+}
+function slacktee_logout_televinken {
+  echo "$HOSTNAME logout session by `getent passwd $USER | cut -d ':' -f 5 | cut -d ',' -f 1` ($USER)" | tvcc-televinken-slacktee -c log -p -a good
+}
+
+function start_bria {
+  killall -15 bria
+  nohup bria &
+}
+
+function fix_bria {
+zenity --timeout=10 --height=50 --width=360 --title "System Authority" --question --text="Are you sure you want to restart Bria? \n\nOnly use this if you are experiencing problems with Bria"
+if [ $? = 0 ]; then
+        killall -15 bria
+        nohup bria &
+else
+        exit
+fi
+
+}
+
+function restore_bria {
+
+zenity --timeout=10 --height=50 --width=360 --title "System Authority" --question --text="Are you sure you want to restore Bria? \n\nOnly use this if you are experiencing problems with Bria. This will restore the most recent backup of your softphone profile."
+if [ $? = 0 ]; then
+        killall -15 bria
+        rm ~/.cpspace/*
+        cp -R ~/.cpspacebak/* ~/.cpspace/
+        nohup bria &
+else
+        exit
+fi
+
+}
+
+function backup_bria  {
+  mkdir ~/.cpspacebak
+  cp -R ~/.cpspace/* ~/.cpspacebak/
+}
+
+function pulse_restart {
+
+pulseaudio -k
+sleep 0.1
+pulseaudio -D
+zenity --title "System Authority" --info --text "Sound Service Restarted" --timeout 2
+
+}
+
+function backup_vm_conf {
+  mkdir ~/.config/VirtualBoxBak
+  cp -R ~/.config/VirtualBox/* ~/.config/VirtualBoxBak/
+}
+
+function start_slack {
+  nohup slack &
+}
+function start_firefox_foretag {
+  nohup firefox https://login06.dialing.se &
+}
+
+function start_firefox_telesales {
+  nohup firefox https://login06.dialing.se &
+}
+
+function start_firefox_televinken {
+  nohup firefox https://tv.dialingozone.com &
+}
+
+function start_firefox_kundservice {
+  nohup firefox https://crm.tre.se &
+}
+
+function start_remote_foretag {
+  /mnt/.system/foretag/admin/server/./remote.sh &
+}
+
+function start_remote_kundservice {
+  /mnt/.system/kundservice/admin/server/./remote.sh &
+}
+
+function start_remote_telesales {
+  /mnt/.system/telesales/admin/server/./remote.sh &
+}
+
+function startvm_foretag {
+  VBoxManage startvm winux001
+  VBoxManage startvm winux002
+  VBoxManage startvm winux003
+  VBoxManage startvm winux004
+  VBoxManage startvm winux005
+  VBoxManage startvm winux006
+  VBoxManage startvm winux007
+  VBoxManage startvm winux008
+  VBoxManage startvm winux009
+  VBoxManage startvm winux010
+  VBoxManage startvm winux011
+  VBoxManage startvm winux012
+  VBoxManage startvm winuc078
+  VBoxManage startvm winuc079
+  VBoxManage startvm winuc080
+  VBoxManage startvm winuc081
+  VBoxManage startvm winuc082
+  VBoxManage startvm winuc083
+  VBoxManage startvm winuc084
+  VBoxManage startvm winuc085
+  VBoxManage startvm winuc086
+  VBoxManage startvm winuc087
+  VBoxManage startvm winuc088
+  VBoxManage startvm winuc089
+  VBoxManage startvm winuc090
+  VBoxManage startvm winuc091
+  VBoxManage startvm winuc092
+  VBoxManage startvm winuc093
+  VBoxManage startvm winuc094
+  VBoxManage startvm winuc095
+  VBoxManage startvm nux001
+  VBoxManage startvm nux002
+  VBoxManage startvm nux003
+  VBoxManage startvm nux004
+  VBoxManage startvm nux005
+  VBoxManage startvm nux006
+  VBoxManage startvm nux007
+  VBoxManage startvm nux008
+  VBoxManage startvm nux009
+  VBoxManage startvm nux010
+  VBoxManage startvm nux011
+  VBoxManage startvm nux012
+  VBoxManage startvm nux013
+  VBoxManage startvm nux014
+  VBoxManage startvm nux015
+  VBoxManage startvm nux016
+  VBoxManage startvm nux017
+  VBoxManage startvm nux018
+  VBoxManage startvm nux019
+  VBoxManage startvm nux020
+}
+
+function startvm_telesales {
+  ls
+}
+
+function startvm_televinken {
+  VBoxManage startvm winux069
+}
+
+function set_background_foretag {
+  gsettings set org.gnome.desktop.background picture-uri 'file:///usr/local/bin/tvcc/share/3foretag/assets/3logo.jpg'
+  #gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/warty-final-ubuntu.png'
+}
+
+function set_background_telesales {
+  gsettings set org.gnome.desktop.background picture-uri 'file:///usr/local/bin/tvcc/share/3telesales/assets/3logo.jpg'
+  #gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/warty-final-ubuntu.png'
+}
+
+function set_background_televinken {
+  gsettings set org.gnome.desktop.background picture-uri 'file:///usr/local/bin/tvcc/share/televinken/assets/wallpaper6.jpg'
+  #gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/warty-final-ubuntu.png'
+}
+
+function set_background_kundservice {
+  gsettings set org.gnome.desktop.background picture-uri 'file:///usr/local/bin/tvcc/share/3kundservice/assets/3logo.jpg'
+  #gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/warty-final-ubuntu.png'
+}
+
+function set_background_3savedesk {
+  gsettings set org.gnome.desktop.background picture-uri 'file:///usr/local/bin/tvcc/share/3savedesk/assets/3logo.jpg'
+  #gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/warty-final-ubuntu.png'
+}
+
+
+function set_launcher_foretag {
+
+gsettings set com.canonical.Unity.Launcher favorites "[
+'application://nautilus-home.desktop',
+'application://google-chrome.desktop',
+'application://firefox.desktop',
+'application:///mnt/.system/foretag/admin/client/remote.desktop',
+'application://virtualbox.desktop',
+'application://bria.desktop',
+'application://gnome-calculator.desktop',
+'application://xpad.desktop',
+'application://slack.desktop',
+'unity://running-apps',
+'application:///usr/local/bin/tvcc/share/3foretag/shortcuts/3foretag-assistance.desktop',
+'application:///usr/local/bin/tvcc/share/3foretag/shortcuts/3foretag-control-center.desktop',
+'application:///usr/local/bin/tvcc/share/3foretag/shortcuts/3foretag-logout.desktop',
+'application:///usr/local/bin/tvcc/share/3foretag/shortcuts/3foretag-reboot.desktop',
+'unity://expo-icon',
+'unity://devices']"
+}
+
+function set_launcher_telesales {
+
+gsettings set com.canonical.Unity.Launcher favorites "[
+'application://nautilus-home.desktop',
+'application://google-chrome.desktop',
+'application://firefox.desktop',
+'application:///mnt/.system/telesales/admin/client/remote.desktop',
+'application://bria.desktop',
+'application://gnome-calculator.desktop',
+'application://xpad.desktop',
+'unity://running-apps',
+'application:///usr/local/bin/tvcc/share/3telesales/shortcuts/3telesales-assistance.desktop',
+'application:///usr/local/bin/tvcc/share/3telesales/shortcuts/3telesales-control-center.desktop',
+'application:///usr/local/bin/tvcc/share/3telesales/shortcuts/3telesales-logout.desktop',
+'application:///usr/local/bin/tvcc/share/3telesales/shortcuts/3telesales-reboot.desktop',
+'unity://expo-icon',
+'unity://devices']"
+}
+
+function set_launcher_televinken {
+
+gsettings set com.canonical.Unity.Launcher favorites "[
+'application://nautilus-home.desktop',
+'application://google-chrome.desktop',
+'application://gnome-calculator.desktop',
+'application://xpad.desktop',
+'application://slack.desktop',
+'unity://running-apps',
+'application://wps-office-et.desktop',
+'application://wps-office-wps.desktop',
+'application:///usr/local/bin/tvcc/share/televinken/shortcuts/televinken-assistance.desktop',
+'application:///usr/local/bin/tvcc/share/televinken/shortcuts/televinken-control-center.desktop',
+'application:///usr/local/bin/tvcc/share/televinken/shortcuts/televinken-logout.desktop',
+'application:///usr/local/bin/tvcc/share/televinken/shortcuts/televinken-reboot.desktop',
+'unity://expo-icon',
+'unity://devices']"
+}
+
+function set_launcher_kundservice {
+
+gsettings set com.canonical.Unity.Launcher favorites "[
+'application://nautilus-home.desktop',
+'application://google-chrome.desktop',
+'application:///mnt/.system/kundservice/admin/client/remote.desktop',
+'application://gnome-calculator.desktop',
+'application://xpad.desktop',
+'application://bria.desktop',
+'unity://running-apps',
+'application:///usr/local/bin/tvcc/share/3kundservice/shortcuts/3kundservice-assistance.desktop',
+'application:///usr/local/bin/tvcc/share/3kundservice/shortcuts/3kundservice-control-center.desktop',
+'application:///usr/local/bin/tvcc/share/3kundservice/shortcuts/3kundservice-logout.desktop',
+'application:///usr/local/bin/tvcc/share/3kundservice/shortcuts/3kundservice-reboot.desktop',
+'unity://expo-icon',
+'unity://devices']"
+}
+
+function set_launcher_3savedesk {
+
+gsettings set com.canonical.Unity.Launcher favorites "[
+'application://nautilus-home.desktop',
+'application://google-chrome.desktop',
+'application:///mnt/.system/kundservice/admin/client/remote.desktop',
+'application://gnome-calculator.desktop',
+'application://xpad.desktop',
+'application://bria.desktop',
+'unity://running-apps',
+'application:///usr/local/bin/tvcc/share/3savedesk/shortcuts/3savedesk-assistance.desktop',
+'application:///usr/local/bin/tvcc/share/3savedesk/shortcuts/3savedesk-control-center.desktop',
+'application:///usr/local/bin/tvcc/share/3savedesk/shortcuts/3savedesk-logout.desktop',
+'application:///usr/local/bin/tvcc/share/3savedesk/shortcuts/3savedesk-reboot.desktop',
+'unity://expo-icon',
+'unity://devices']"
+}
+
+function set_menues_foretag {
+
+echo "
+
+  gsettings set com.canonical.indicator.session show-real-name-on-panel true
+  gsettings set com.canonical.indicator.session suppress-logout-menuitem true
+  gsettings set com.canonical.indicator.session suppress-restart-menuitem true
+  gsettings set com.canonical.indicator.session suppress-shutdown-menuitem true
+  gsettings set com.canonical.indicator.session suppress-logout-restart-shutdown true
+  gsettings set com.canonical.indicator.session user-show-menu true
+  gsettings set com.canonical.indicator.datetime custom-time-format '%l:%M %p'
+  #
+  gsettings set com.canonical.indicator.datetime show-calendar true
+  gsettings set com.canonical.indicator.datetime show-clock true
+  gsettings set com.canonical.indicator.datetime show-date true
+  gsettings set com.canonical.indicator.datetime show-day true
+  gsettings set com.canonical.indicator.datetime show-events true
+  gsettings set com.canonical.indicator.datetime show-locations true
+  gsettings set com.canonical.indicator.datetime show-seconds true
+  gsettings set com.canonical.indicator.datetime show-week-numbers true
+  gsettings set com.canonical.indicator.datetime time-format '24-hour'
+  gsettings set com.canonical.indicator.datetime timezone-name 'Asia/Nicosia Nicosia'
+  #
+  gsettings set org.gnome.desktop.session idle-delay 7200
+  #
+  gsettings set org.gnome.Vino enabled true
+  gsettings set org.gnome.Vino view-only false
+  gsettings set org.gnome.Vino prompt-enabled false
+  gsettings set org.gnome.Vino icon-visibility never
+  gsettings set org.gnome.Vino vnc-password 'YWRtaW4pIT0='
+
+" | bash
+
+}
+
+function set_menues_telesales {
+
+echo "
+
+  gsettings set com.canonical.indicator.session show-real-name-on-panel true
+  gsettings set com.canonical.indicator.session suppress-logout-menuitem true
+  gsettings set com.canonical.indicator.session suppress-restart-menuitem true
+  gsettings set com.canonical.indicator.session suppress-shutdown-menuitem true
+  gsettings set com.canonical.indicator.session suppress-logout-restart-shutdown true
+  gsettings set com.canonical.indicator.session user-show-menu true
+  gsettings set com.canonical.indicator.datetime custom-time-format '%l:%M %p'
+  #
+  gsettings set com.canonical.indicator.datetime show-calendar true
+  gsettings set com.canonical.indicator.datetime show-clock true
+  gsettings set com.canonical.indicator.datetime show-date true
+  gsettings set com.canonical.indicator.datetime show-day true
+  gsettings set com.canonical.indicator.datetime show-events true
+  gsettings set com.canonical.indicator.datetime show-locations true
+  gsettings set com.canonical.indicator.datetime show-seconds true
+  gsettings set com.canonical.indicator.datetime show-week-numbers true
+  gsettings set com.canonical.indicator.datetime time-format '24-hour'
+  gsettings set com.canonical.indicator.datetime timezone-name 'Asia/Nicosia Nicosia'
+  #
+  gsettings set org.gnome.desktop.session idle-delay 7200
+  #
+  gsettings set org.gnome.Vino enabled true
+  gsettings set org.gnome.Vino view-only false
+  gsettings set org.gnome.Vino prompt-enabled false
+  gsettings set org.gnome.Vino icon-visibility never
+  gsettings set org.gnome.Vino vnc-password 'YWRtaW4pIT0='
+  #
+  gsettings set org.gtk.Settings.FileChooser show-hidden false
+
+" | bash
+
+}
+
+function set_menues_televinken {
+
+echo "
+
+  gsettings set com.canonical.indicator.session show-real-name-on-panel true
+  gsettings set com.canonical.indicator.session suppress-logout-menuitem true
+  gsettings set com.canonical.indicator.session suppress-restart-menuitem true
+  gsettings set com.canonical.indicator.session suppress-shutdown-menuitem true
+  gsettings set com.canonical.indicator.session suppress-logout-restart-shutdown true
+  gsettings set com.canonical.indicator.session user-show-menu true
+  gsettings set com.canonical.indicator.datetime custom-time-format '%l:%M %p'
+  #
+  gsettings set com.canonical.indicator.datetime show-calendar true
+  gsettings set com.canonical.indicator.datetime show-clock true
+  gsettings set com.canonical.indicator.datetime show-date true
+  gsettings set com.canonical.indicator.datetime show-day true
+  gsettings set com.canonical.indicator.datetime show-events true
+  gsettings set com.canonical.indicator.datetime show-locations true
+  gsettings set com.canonical.indicator.datetime show-seconds true
+  gsettings set com.canonical.indicator.datetime show-week-numbers true
+  gsettings set com.canonical.indicator.datetime time-format '24-hour'
+  gsettings set com.canonical.indicator.datetime timezone-name 'Asia/Nicosia Nicosia'
+  #
+  gsettings set org.gnome.desktop.session idle-delay 7200
+  #
+  gsettings set org.gnome.Vino enabled true
+  gsettings set org.gnome.Vino view-only false
+  gsettings set org.gnome.Vino prompt-enabled false
+  gsettings set org.gnome.Vino icon-visibility never
+  gsettings set org.gnome.Vino vnc-password 'YWRtaW4pIT0='
+  #
+  gsettings set org.gtk.Settings.FileChooser show-hidden false
+
+" | bash
+
+}
+
+function set_menues_kundservice {
+
+echo "
+
+  gsettings set com.canonical.indicator.session show-real-name-on-panel true
+  gsettings set com.canonical.indicator.session suppress-logout-menuitem true
+  gsettings set com.canonical.indicator.session suppress-restart-menuitem true
+  gsettings set com.canonical.indicator.session suppress-shutdown-menuitem true
+  gsettings set com.canonical.indicator.session suppress-logout-restart-shutdown true
+  gsettings set com.canonical.indicator.session user-show-menu true
+  gsettings set com.canonical.indicator.datetime custom-time-format '%l:%M %p'
+  #
+  gsettings set com.canonical.indicator.datetime show-calendar true
+  gsettings set com.canonical.indicator.datetime show-clock true
+  gsettings set com.canonical.indicator.datetime show-date true
+  gsettings set com.canonical.indicator.datetime show-day true
+  gsettings set com.canonical.indicator.datetime show-events true
+  gsettings set com.canonical.indicator.datetime show-locations true
+  gsettings set com.canonical.indicator.datetime show-seconds true
+  gsettings set com.canonical.indicator.datetime show-week-numbers true
+  gsettings set com.canonical.indicator.datetime time-format '24-hour'
+  gsettings set com.canonical.indicator.datetime timezone-name 'Asia/Nicosia Nicosia'
+  #
+  gsettings set org.gnome.desktop.session idle-delay 1800
+  #
+  gsettings set org.gnome.Vino enabled true
+  gsettings set org.gnome.Vino view-only false
+  gsettings set org.gnome.Vino prompt-enabled false
+  gsettings set org.gnome.Vino icon-visibility never
+  gsettings set org.gnome.Vino vnc-password 'YWRtaW4pIT0='
+  #
+  gsettings set org.gtk.Settings.FileChooser show-hidden false
+
+" | bash
+
+}
+
+function set_menues_3savedesk {
+
+echo "
+
+  gsettings set com.canonical.indicator.session show-real-name-on-panel true
+  gsettings set com.canonical.indicator.session suppress-logout-menuitem true
+  gsettings set com.canonical.indicator.session suppress-restart-menuitem true
+  gsettings set com.canonical.indicator.session suppress-shutdown-menuitem true
+  gsettings set com.canonical.indicator.session suppress-logout-restart-shutdown true
+  gsettings set com.canonical.indicator.session user-show-menu true
+  gsettings set com.canonical.indicator.datetime custom-time-format '%l:%M %p'
+  #
+  gsettings set com.canonical.indicator.datetime show-calendar true
+  gsettings set com.canonical.indicator.datetime show-clock true
+  gsettings set com.canonical.indicator.datetime show-date true
+  gsettings set com.canonical.indicator.datetime show-day true
+  gsettings set com.canonical.indicator.datetime show-events true
+  gsettings set com.canonical.indicator.datetime show-locations true
+  gsettings set com.canonical.indicator.datetime show-seconds true
+  gsettings set com.canonical.indicator.datetime show-week-numbers true
+  gsettings set com.canonical.indicator.datetime time-format '24-hour'
+  gsettings set com.canonical.indicator.datetime timezone-name 'Asia/Nicosia Nicosia'
+  #
+  gsettings set org.gnome.desktop.session idle-delay 1800
+  #
+  gsettings set org.gnome.Vino enabled true
+  gsettings set org.gnome.Vino view-only false
+  gsettings set org.gnome.Vino prompt-enabled false
+  gsettings set org.gnome.Vino icon-visibility never
+  gsettings set org.gnome.Vino vnc-password 'YWRtaW4pIT0='
+  #
+  gsettings set org.gtk.Settings.FileChooser show-hidden false
+
+" | bash
+
+}
+
+
+#######################################
+#          LOGOUT FUNCTIONS
+#######################################
+
+function savevm_foretag {
+  VBoxManage controlvm nux001 acpipowerbutton
+  VBoxManage controlvm nux002 acpipowerbutton
+  VBoxManage controlvm nux003 acpipowerbutton
+  VBoxManage controlvm nux004 acpipowerbutton
+  VBoxManage controlvm nux005 acpipowerbutton
+  VBoxManage controlvm nux006 acpipowerbutton
+  VBoxManage controlvm nux007 acpipowerbutton
+  VBoxManage controlvm nux008 acpipowerbutton
+  VBoxManage controlvm nux009 acpipowerbutton
+  VBoxManage controlvm nux010 acpipowerbutton
+  VBoxManage controlvm nux011 acpipowerbutton
+  VBoxManage controlvm nux012 acpipowerbutton
+  VBoxManage controlvm nux013 acpipowerbutton
+  VBoxManage controlvm nux014 acpipowerbutton
+  VBoxManage controlvm nux015 acpipowerbutton
+  VBoxManage controlvm nux016 acpipowerbutton
+  VBoxManage controlvm nux017 acpipowerbutton
+  VBoxManage controlvm nux018 acpipowerbutton
+  VBoxManage controlvm nux019 acpipowerbutton
+  VBoxManage controlvm nux020 acpipowerbutton
+}
+
+function savevm_telesales {
+
+  VBoxManage controlvm winux001 savestate
+  VBoxManage controlvm winux002 savestate
+  VBoxManage controlvm winux003 savestate
+  VBoxManage controlvm winux004 savestate
+  VBoxManage controlvm winux005 savestate
+  VBoxManage controlvm winux006 savestate
+  VBoxManage controlvm winux007 savestate
+  VBoxManage controlvm winux008 savestate
+  VBoxManage controlvm winux009 savestate
+  VBoxManage controlvm winux010 savestate
+  VBoxManage controlvm winux011 savestate
+  VBoxManage controlvm winux012 savestate
+
+}
+
+function savevm_televinken {
+
+  VBoxManage controlvm winux069 savestate
+
+}
+
+function logout_wallpaper {
+
+  gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/warty-final-ubuntu.png'
+
+}
+
+function timeout_televinken {
+
+  until date | fgrep -q "01:00:"; do
+    sleep 1
+  done
+    tvcc-televinken-force-logout
+
+}
+
+function timeout_telesales {
+
+  until date | fgrep -q "01:00:"; do
+    sleep 1
+  done
+	tvcc-3telesales-force-logout
+
+}
+
+function timeout_foretag {
+
+  until date | fgrep -q "19:00:"; do
+    sleep 1
+  done
+	tvcc-3foretag-force-logout
+
+}
+
+function timeout_kundservice {
+
+  until date | fgrep -q "01:00:"; do
+    sleep 1
+  done
+	tvcc-3kundservice-force-logout
+}
+
+function timeout_3savedesk {
+
+  until date | fgrep -q "01:00:"; do
+    sleep 1
+  done
+        tvcc-3savedesk-force-logout
+}
+
+function close_apps {
+
+  killall -15 firefox
+  killall -15 pidgin
+  killall -15 nautilus
+  killall -15 gnome-calculator
+  killall -15 slack
+  killall -15 bria
+  killall -15 google-chrome
+  killall -15 google-chrome-stable
+
+}
+
+function set_logon_script_foretag {
+
+  rm -rf ~/.config/autostart/*
+  cp -r /usr/local/bin/tvcc/share/3foretag/shortcuts/3foretag-login.desktop ~/.config/autostart/
+
+}
+
+function set_logon_script_kundservice {
+
+  rm -rf ~/.config/autostart/*
+  cp -r /usr/local/bin/tvcc/share/3kundservice/shortcuts/3kundservice-login.desktop ~/.config/autostart/
+
+}
+
+function set_logon_script_3savedesk {
+
+  mkdir ~/.config/autostart
+  rm -rf ~/.config/autostart/*
+  cp -r /usr/local/bin/tvcc/share/3savedesk/shortcuts/3savedesk-login.desktop ~/.config/autostart/
+
+}
+
+function set_logon_script_telesales {
+
+  rm -rf ~/.config/autostart/*
+  cp -r /usr/local/bin/tvcc/share/3telesales/shortcuts/3telesales-login.desktop ~/.config/autostart/
+}
+
+function set_logon_script_televinken {
+
+  rm -rf ~/.config/autostart/*
+  cp -r /usr/local/bin/tvcc/share/televinken/shortcuts/televinken-login.desktop ~/.config/autostart/
+
+}
+
+function check_rdesktop {
+
+  if (( $(ps -ef | grep -v grep | grep rdesktop | wc -l) > 0 ))
+    then
+      zenity --title="You forgot something..." --error --text="\n\n\n\n\nERROR You must logout from Remote Desktop services before your session can be terminated" --width=400 --height=50
+    else
+      zenity --timeout=10 --title "System Authority" --question --text="Are you sure you want to logout?"
+      if [[ $? = 0 ]]; then
+        logout_procedure
+      else
+        exit
+      fi
+  fi
+
+}
+
+function download_remote_settings {
+
+  #!/bin/bash
+killall remmina
+rm -rf ~/.remmina/
+mkdir ~/.remmina
+touch ~/.remmina/3.remmina
+touch ~/.remmina/remmina.pref
+#rm -rf ~/.local/share/remmina/
+#mkdir ~/.local/share/remmina
+#rm ~/.local/share/remmina/settings.remmina
+#touch ~/.local/share/remmina/settings.remmina
+
+
+#rm -rf ~/.config/remmina
+#mkdir ~/.config/remmina
+#rm ~/.config/remmina/remmina.pref
+#touch ~/.config/remmina/remmina.pref
+
+
+echo "[remmina]
+sound=off
+sharefolder=
+name=3 Remote
+cert_ignore=1
+console=0
+ssh_enabled=0
+exec=
+clientname=
+loadbalanceinfo=
+server=172.28.64.150
+colordepth=0
+ssh_auth=0
+postcommand=
+group=
+sharesmartcard=0
+quality=9
+username=
+ssh_charset=
+ssh_loopback=0
+ssh_username=
+gateway_password=
+gateway_server=
+gateway_username=
+microphone=0
+execpath=
+resolution_width=1856
+gateway_usage=0
+disableautoreconnect=0
+password=
+resolution_height=1051
+security=
+domain=3INTERNAL
+disablepasswordstoring=0
+precommand=
+ssh_server=
+protocol=RDP
+shareprinter=0
+gateway_domain=
+disableclipboard=0
+ssh_privatekey=
+" >> ~/.remmina/3.remmina
+
+
+echo "[remmina_pref]
+save_view_mode=true
+floating_toolbar_placement=0
+toolbar_placement=3
+always_show_tab=false
+hide_connection_toolbar=true
+default_action=0
+scale_quality=3
+ssh_loglevel=1
+screenshot_path=/mnt/kundservice/skundservice/Pictures
+ssh_parseconfig=true
+hide_toolbar=false
+hide_statusbar=false
+small_toolbutton=false
+view_file_mode=0
+resolutions=640x480,800x600,1024x768,1152x864,1280x960,1400x1050,1856x1051
+keystrokes=Send hello world§hello world\\n
+main_width=600
+main_height=400
+main_maximize=false
+main_sort_column_id=1
+main_sort_order=0
+expanded_group=
+toolbar_pin_down=false
+sshtunnel_port=4732
+applet_new_ontop=false
+applet_hide_count=false
+applet_enable_avahi=false
+disable_tray_icon=false
+dark_tray_icon=false
+recent_maximum=10
+default_mode=0
+tab_mode=0
+fullscreen_toolbar_visibility=0
+show_buttons_icons=0
+show_menu_icons=0
+auto_scroll_step=10
+hostkey=65508
+shortcutkey_fullscreen=102
+shortcutkey_autofit=49
+shortcutkey_nexttab=65363
+shortcutkey_prevtab=65361
+shortcutkey_scale=115
+shortcutkey_grab=65508
+shortcutkey_viewonly=109
+shortcutkey_screenshot=65481
+shortcutkey_minimize=65478
+shortcutkey_disconnect=65473
+shortcutkey_toolbar=116
+vte_font=
+vte_allow_bold_text=true
+vte_lines=512
+secret=0rLH1EjDn7jdtkTOnsJt9wAGniSLmm3dC93fSkdkjBk=
+rdp_keyboard_layout=41D
+rdp_use_client_keymap=0
+rdp_quality_0=6F
+rdp_quality_1=7
+rdp_quality_2=1
+rdp_quality_9=80
+rdp_deviceScaleFactor=0
+rdp_desktopScaleFactor=0
+rdp_desktopOrientation=0
+
+[ssh_colors]
+background=rgb(213,204,186)
+cursor=rgb(69,55,60)
+foreground=rgb(69,55,60)
+color0=rgb(32,17,27)
+color1=rgb(190,16,14)
+color2=rgb(133,129,98)
+color3=rgb(234,165,73)
+color4=rgb(66,106,121)
+color5=rgb(151,82,44)
+color6=rgb(152,154,156)
+color7=rgb(150,140,131)
+color8=rgb(94,82,82)
+color9=rgb(190,16,14)
+color10=rgb(133,129,98)
+color11=rgb(234,165,73)
+color12=rgb(66,106,121)
+color13=rgb(151,82,44)
+color14=rgb(152,154,156)
+color15=rgb(213,204,186)
+" >> ~/.remmina/remmina.pref
+
+remmina
+
+}

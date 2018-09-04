@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source /usr/local/bin/tvcc/lib/functions
+
+set_logon_script_telesales
+
+gsettings set com.canonical.Unity.Launcher favorites "[
+'application://nautilus-home.desktop',
+'application://google-chrome.desktop',
+'application://firefox.desktop',
+'application:///mnt/.system/telesales/admin/client/remote.desktop',
+'application://bria.desktop',
+'application://gnome-calculator.desktop',
+'application://xpad.desktop',
+'unity://running-apps',
+'application:///usr/local/bin/tvcc/share/3telesales/shortcuts/3telesales-assistance.desktop',
+'application:///usr/local/bin/tvcc/share/3telesales/shortcuts/3telesales-control-center.desktop',
+'application:///usr/local/bin/tvcc/share/3telesales/shortcuts/3telesales-logout.desktop',
+'application:///usr/local/bin/tvcc/share/3telesales/shortcuts/3telesales-reboot.desktop',
+'unity://expo-icon',
+'unity://devices']"
+
+zenity --info --text "Your software has been updated to the latest version!" --timeout 5

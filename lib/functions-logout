@@ -1,0 +1,959 @@
+#!/bin/bash
+
+##################################################################
+
+function reboot_3foretag {
+
+if (( $(ps -ef | grep -v grep | grep rdesktop | wc -l) > 0 ))
+  then
+    zenity --title="You forgot something..." --error --text="\n\n\n\n\nERROR: You must logout from Remote Desktop services before your session can be terminated" --width=400 --height=50
+  else
+    COUNT=11
+
+    START=$COUNT                                                # Set a start point.
+
+    until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+        ((COUNT-=1))                                            # Decrement seconds.
+        PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+        echo "#Automatic Reboot$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+          echo $PERCENT                                         # Outut for progbar.
+        sleep 1
+    done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+        --window-icon=$ICON --auto-close --height=100 --width=360
+        if [ $? = 0 ]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      set_logon_script_foretag
+      logout_wallpaper
+      echo "# Reverting Preferences" ; sleep 3
+
+      # =================================================================
+      savevm_foretag
+      echo "60"
+      echo "# Saving VM"
+
+      # =================================================================
+      close_apps
+      slacktee_logout_foretag
+      echo "90"
+      echo "# Closing Applications"
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+      sleep 7
+      /sbin/reboot
+      pkill -u $USER
+      /sbin/reboot
+      exit 0
+
+
+  else
+   exit
+  fi
+  fi
+
+
+}
+
+function reboot_televinken {
+
+COUNT=11
+
+START=$COUNT                                                # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+  ((COUNT-=1))                                            # Decrement seconds.
+  PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+  echo "#Automatic Reboot$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+  echo $PERCENT                                         # Outut for progbar.
+  sleep 1
+done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+--window-icon=$ICON --auto-close --height=100 --width=460
+if [ $? = 0 ]; then
+
+  # Force Zenity Status message box to always be on top.
+  sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+  (
+    # =================================================================
+    close_apps
+    echo "10"
+    echo "# Closing Applications" ; #sleep 1
+
+    # =================================================================
+    savevm_televinken
+    echo "60"
+    echo "# Saving User Settings" ; #sleep 1
+
+    # =================================================================
+
+    set_logon_script_televinken
+    logout_wallpaper
+    slacktee_logout_televinken
+    echo "# Reverting Preferences" ; #sleep 1
+
+  ) |
+  zenity --progress \
+  --title="Logging out..." \
+  --text="First Task." \
+  --percentage=0 \
+  --pulsate \
+  --auto-close \
+  --auto-kill
+
+  (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+  sleep 1
+  systemctl reboot -i
+exit 0
+
+
+else
+  exit
+fi
+
+
+}
+
+function reboot_3kundservice {
+
+COUNT=11
+
+START=$COUNT                                                # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+  ((COUNT-=1))                                            # Decrement seconds.
+  PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+  echo "#Automatic Reboot$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+  echo $PERCENT                                         # Outut for progbar.
+  sleep 1
+done | zenity --title "System Authority new" --progress --percentage=0 --text=""\
+--window-icon=$ICON --auto-close --height=100 --width=460
+if [ $? = 0 ]; then
+
+  # Force Zenity Status message box to always be on top.
+  sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+  (
+    # =================================================================
+    close_apps
+    echo "10"
+    echo "# Closing Applications" ; #sleep 1
+
+    # =================================================================
+    savevm_kundservice
+    echo "60"
+    echo "# Saving User Settings" ; #sleep 1
+
+    # =================================================================
+
+    set_logon_script_kundservice
+    logout_wallpaper
+    slacktee_logout_kundservice
+    echo "# Reverting Preferences" ; #sleep 1
+
+  ) |
+  zenity --progress \
+  --title="Logging out..." \
+  --text="First Task." \
+  --percentage=0 \
+  --pulsate \
+  --auto-close \
+  --auto-kill
+
+  (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+  sleep 1
+  systemctl reboot -i
+exit 0
+
+
+else
+  exit
+fi
+
+
+}
+
+function reboot_3savedesk {
+
+COUNT=11
+
+START=$COUNT                                                # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+  ((COUNT-=1))                                            # Decrement seconds.
+  PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+  echo "#Automatic Reboot$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+  echo $PERCENT                                         # Outut for progbar.
+  sleep 1
+done | zenity --title "System Authority new" --progress --percentage=0 --text=""\
+--window-icon=$ICON --auto-close --height=100 --width=460
+if [ $? = 0 ]; then
+
+  # Force Zenity Status message box to always be on top.
+  sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+  (
+    # =================================================================
+    close_apps
+    echo "10"
+    echo "# Closing Applications" ; #sleep 1
+
+    # =================================================================
+    savevm_3savedesk
+    echo "60"
+    echo "# Saving User Settings" ; #sleep 1
+
+    # =================================================================
+
+    set_logon_script_3savedesk
+    logout_wallpaper
+    slacktee_logout_3savedesk
+    echo "# Reverting Preferences" ; #sleep 1
+
+  ) |
+  zenity --progress \
+  --title="Logging out..." \
+  --text="First Task." \
+  --percentage=0 \
+  --pulsate \
+  --auto-close \
+  --auto-kill
+
+  (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+  sleep 1
+  systemctl reboot -i
+else
+  exit
+fi
+
+
+}
+
+
+
+function reboot_3telesales {
+
+COUNT=11
+
+START=$COUNT                                                # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+  ((COUNT-=1))                                            # Decrement seconds.
+  PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+  echo "#Automatic Reboot$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+  echo $PERCENT                                         # Outut for progbar.
+  sleep 1
+done | zenity --title "System Authority new" --progress --percentage=0 --text=""\
+--window-icon=$ICON --auto-close --height=100 --width=460
+if [ $? = 0 ]; then
+
+  # Force Zenity Status message box to always be on top.
+  sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+  (
+    # =================================================================
+    close_apps
+    echo "10"
+    echo "# Closing Applications" ; #sleep 1
+
+    # =================================================================
+    savevm_kundservice
+    echo "60"
+    echo "# Saving User Settings" ; #sleep 1
+
+    # =================================================================
+
+    set_logon_script_3telesales
+    logout_wallpaper
+    slacktee_logout_3telesales
+    echo "# Reverting Preferences" ; #sleep 1
+
+  ) |
+  zenity --progress \
+  --title="Logging out..." \
+  --text="First Task." \
+  --percentage=0 \
+  --pulsate \
+  --auto-close \
+  --auto-kill
+
+  (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+  sleep 1
+  systemctl reboot -i
+exit 0
+
+
+else
+  exit
+fi
+
+
+}
+
+
+#############################################################################
+
+function force_logout_3foretag {
+
+COUNT=360
+
+START=$COUNT                                                # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+    ((COUNT-=1))                                            # Decrement seconds.
+    PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+    echo "#Automatic Logout$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+      echo $PERCENT                                         # Outut for progbar.
+    sleep 1
+done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+    --window-icon=$ICON --auto-close --height=100 --width=360
+
+    if [[ $? = 0 ]]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      set_logon_script_foretag
+      logout_wallpaper
+      echo "# Reverting Preferences" ; sleep 3
+
+      # =================================================================
+      savevm_foretag
+      echo "60"
+      echo "# Saving VM"
+
+      # =================================================================
+      close_apps
+      echo "90"
+      echo "# Closing Applications"
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+
+      sleep 5
+      DISPLAY=:0 gnome-session-quit --force
+      DISPLAY=:0 gnome-session-quit --force
+      exit 0
+        pkill -u $USER
+
+    else
+       exit
+    fi
+
+
+}
+
+function force_logout_3kundservice {
+
+COUNT=360
+
+START=$COUNT                                                # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+    ((COUNT-=1))                                            # Decrement seconds.
+    PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+    echo "#Automatic Logout$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+      echo $PERCENT                                         # Outut for progbar.
+    sleep 1
+done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+    --window-icon=$ICON --auto-close --height=100 --width=360
+
+    if [[ $? = 0 ]]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      set_logon_script_kundservice
+      logout_wallpaper
+      echo "# Reverting Preferences" ; sleep 3
+
+      # =================================================================
+      savevm_foretag
+      echo "60"
+      echo "# Saving VM"
+
+      # =================================================================
+      close_apps
+      slacktee_logout_kundservice
+      echo "90"
+      echo "# Closing Applications"
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+      DISPLAY=:0 gnome-session-quit --force
+      DISPLAY=:0 gnome-session-quit --force
+      exit 0
+
+    else
+       exit
+    fi
+
+
+}
+
+function force_logout_3savedesk {
+
+COUNT=360
+
+START=$COUNT                                                # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+    ((COUNT-=1))                                            # Decrement seconds.
+    PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+    echo "#Automatic Logout$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+      echo $PERCENT                                         # Outut for progbar.
+    sleep 1
+done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+    --window-icon=$ICON --auto-close --height=100 --width=360
+
+    if [[ $? = 0 ]]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      set_logon_script_3savedesk
+      logout_wallpaper
+      echo "# Reverting Preferences" ; sleep 3
+
+      # =================================================================
+      savevm_savedesk
+      echo "60"
+      echo "# Saving VM"
+
+      # =================================================================
+      close_apps
+      slacktee_logout_savedesk
+      echo "90"
+      echo "# Closing Applications"
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+      DISPLAY=:0 gnome-session-quit --force
+      DISPLAY=:0 gnome-session-quit --force
+      exit 0
+
+    else
+       exit
+    fi
+
+
+}
+
+
+function force_logout_3telesales {
+
+OUNT=360
+
+START=$COUNT                                                # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+    ((COUNT-=1))                                            # Decrement seconds.
+    PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+    echo "#Automatic Logout$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+      echo $PERCENT                                         # Outut for progbar.
+    sleep 1
+done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+    --window-icon=$ICON --auto-close --height=100 --width=360
+
+    if [[ $? = 0 ]]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      set_logon_script_telesales
+      logout_wallpaper
+      echo "# Reverting Preferences" ; sleep 3
+
+      # =================================================================
+      savevm_telesales
+      echo "60"
+      echo "# Saving VM"
+
+      # =================================================================
+      close_apps
+      echo "90"
+      echo "# Closing Applications"
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+      DISPLAY=:0 gnome-session-quit --force
+      DISPLAY=:0 gnome-session-quit --force
+      exit 0
+
+    else
+       exit
+    fi
+
+
+}
+
+
+function force_logout_televinken {
+
+COUNT=360
+
+START=$COUNT                                                # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+    ((COUNT-=1))                                            # Decrement seconds.
+    PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+    echo "#Automatic Logout$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+      echo $PERCENT                                         # Outut for progbar.
+    sleep 1
+done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+    --window-icon=$ICON --auto-close --height=100 --width=360
+
+    if [[ $? = 0 ]]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      set_logon_script_televinken
+      logout_wallpaper
+      echo "# Reverting Preferences" ; sleep 3
+
+      # =================================================================
+      savevm_televinken
+      echo "60"
+      echo "# Saving VM"
+
+      # =================================================================
+      close_apps
+      echo "90"
+      echo "# Closing Applications"
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+      DISPLAY=:0 gnome-session-quit --force
+      DISPLAY=:0 gnome-session-quit --force
+      exit 0
+
+    else
+       exit
+    fi
+
+
+}
+
+#########################################################################################
+
+
+function logout_3foretag {
+
+if (( $(ps -ef | grep -v grep | grep rdesktop | wc -l) > 0 ))
+  then
+    zenity --title="You forgot something..." --error --text="\n\n\n\n\nERROR: You must logout from Remote Desktop services before your session can be terminated" --width=400 --height=50
+  else
+    COUNT=11
+
+    START=$COUNT                                                # Set a start point.
+
+    until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+        ((COUNT-=1))                                            # Decrement seconds.
+        PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+        echo "#Automatic Logout$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+          echo $PERCENT                                         # Outut for progbar.
+        sleep 1
+    done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+        --window-icon=$ICON --auto-close --height=100 --width=360
+        if [ $? = 0 ]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      set_logon_script_foretag
+      logout_wallpaper
+      echo "# Reverting Preferences" ; sleep 3
+
+      # =================================================================
+      savevm_foretag
+      echo "60"
+      echo "# Saving VM"
+
+      # =================================================================
+      close_apps
+      slacktee_logout_foretag
+      echo "90"
+      echo "# Closing Applications"
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+      sleep 5
+      DISPLAY=:0 gnome-session-quit --force
+      DISPLAY=:0 gnome-session-quit --force
+      sleep 3
+      pkill -u $USER
+      exit 0
+
+
+  else
+   exit
+  fi
+  fi
+
+
+}
+
+
+function logout_3kundservice {
+
+if (( $(ps -ef | grep -v grep | grep rdesktop | wc -l) > 0 ))
+  then
+    zenity --title="You forgot something..." --error --text="\n\n\n\n\nERROR: You must logout from Remote Desktop services before your session can be terminated" --width=400 --height=50
+  else
+    COUNT=11
+
+    START=$COUNT                                                # Set a start point.
+
+    until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+        ((COUNT-=1))                                            # Decrement seconds.
+        PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+        echo "#Automatic Logout$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+          echo $PERCENT                                         # Outut for progbar.
+        sleep 1
+    done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+        --window-icon=$ICON --auto-close --height=100 --width=360
+        if [ $? = 0 ]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      set_logon_script_kundservice
+      logout_wallpaper
+      echo "# Reverting Preferences" ; sleep 3
+
+      # =================================================================
+      close_apps
+      slacktee_logout_kundservice
+      echo "90"
+      echo "# Closing Applications"
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+      DISPLAY=:0 gnome-session-quit --force
+      DISPLAY=:0 gnome-session-quit --force
+      sleep 3
+      pkill -u $USER
+      exit 0
+
+
+  else
+   exit
+  fi
+  fi
+
+
+}
+
+function logout_3savedesk {
+
+if (( $(ps -ef | grep -v grep | grep rdesktop | wc -l) > 0 ))
+  then
+    zenity --title="You forgot something..." --error --text="\n\n\n\n\nERROR: You must logout from Remote Desktop services before your session can be terminated" --width=400 --height=50
+  else
+    COUNT=11
+
+    START=$COUNT                                                # Set a start point.
+
+    until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+        ((COUNT-=1))                                            # Decrement seconds.
+        PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+        echo "#Automatic Logout$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+          echo $PERCENT                                         # Outut for progbar.
+        sleep 1
+    done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+        --window-icon=$ICON --auto-close --height=100 --width=360
+        if [ $? = 0 ]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      set_logon_script_3savedesk
+      logout_wallpaper
+      echo "# Reverting Preferences" ; sleep 3
+
+      # =================================================================
+      close_apps
+      slacktee_logout_3savedesk
+      echo "90"
+      echo "# Closing Applications"
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+killall tvcc*
+session=`loginctl session-status | head -n 1 | awk '{print $1}'`
+loginctl terminate-session $session      
+
+  else
+   exit
+  fi
+  fi
+
+
+}
+
+
+function logout_3telesales {
+
+if (( $(ps -ef | grep -v grep | grep rdesktop | wc -l) > 0 ))
+  then
+    zenity --title="You forgot something..." --error --text="\n\n\n\n\nERROR: You must logout from Remote Desktop services before your session can be terminated" --width=400 --height=50
+  else
+    COUNT=11
+
+    START=$COUNT                                                # Set a start point.
+
+    until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+        ((COUNT-=1))                                            # Decrement seconds.
+        PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+        echo "#Automatic Logout$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+          echo $PERCENT                                         # Outut for progbar.
+        sleep 1
+    done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+        --window-icon=$ICON --auto-close --height=100 --width=360
+        if [ $? = 0 ]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      set_logon_script_telesales
+      logout_wallpaper
+      echo "# Reverting Preferences" ; sleep 3
+
+      # =================================================================
+      savevm_telesales
+      echo "60"
+      echo "# Saving VM"
+
+      # =================================================================
+      close_apps
+      slacktee_logout_telesales
+      echo "90"
+      echo "# Closing Applications"
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+      DISPLAY=:0 gnome-session-quit --force
+      DISPLAY=:0 gnome-session-quit --force
+      sleep 3
+      pkill -u $USER
+      exit 0
+
+
+  else
+   exit
+  fi
+  fi
+
+
+}
+
+
+function logout_televinken {
+
+COUNT=11
+
+START=$COUNT                                                # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                              # Countdown loop.
+    ((COUNT-=1))                                            # Decrement seconds.
+    PERCENT=$((100-100*COUNT/START))                        # Calc percentage.
+    echo "#Automatic Logout$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+      echo $PERCENT                                         # Outut for progbar.
+    sleep 1
+done | zenity --title "System Authority" --progress --percentage=0 --text=""\
+    --window-icon=$ICON --auto-close --height=100 --width=360
+    if [ $? = 0 ]; then
+
+      # Force Zenity Status message box to always be on top.
+      sleep 1 && wmctrl -r "Logging out..." -b add,above &
+
+      (
+      # =================================================================
+      close_apps
+      echo "10"
+      echo "# Closing Applications" ; sleep 2
+
+      # =================================================================
+      savevm_televinken
+      echo "60"
+      echo "# Saving VM" ; sleep 1
+
+      # =================================================================
+
+      set_logon_script_televinken
+      logout_wallpaper
+      slacktee_logout_televinken
+      echo "# Reverting Preferences" ; sleep 1
+
+      ) |
+      zenity --progress \
+        --title="Logging out..." \
+        --text="First Task." \
+        --percentage=0 \
+        --pulsate \
+        --auto-close \
+        --auto-kill
+
+      (( $? != 0 )) && zenity --error --text="Error: Could not complete task."
+      DISPLAY=:0 gnome-session-quit --force
+      DISPLAY=:0 gnome-session-quit --force
+      sleep 3
+      pkill -u $USER
+      exit 0
+
+
+  else
+   exit
+  fi
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

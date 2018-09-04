@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=False
+Name[en_US]=Reboot
+Exec=tvcc-3foretag-reboot
+Comment[en_US]=Reboot
+Name=Reboot
+Comment=Force Reboot
+Icon=/usr/share/icons/hicolor/scalable/actions/system-restart.svg
+

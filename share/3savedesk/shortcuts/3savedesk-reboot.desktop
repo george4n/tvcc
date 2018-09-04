@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=False
+Exec=tvcc-3savedesk-reboot
+Name=Reboot
+Comment=Force Reboot
+Icon=/usr/share/icons/hicolor/scalable/actions/system-restart.svg
+

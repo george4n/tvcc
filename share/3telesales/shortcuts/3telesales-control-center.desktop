@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=False
+Exec=tvcc-3telesales-control-center
+Name=Televinken Control Center
+Comment=Televinken Control Center
+Icon=/usr/share/icons/Humanity/apps/48/checkbox.svg
+

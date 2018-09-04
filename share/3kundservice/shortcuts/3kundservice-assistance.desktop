@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=False
+Exec=tvcc-3kundservice-assistance
+Name=Assistance
+Comment=Get assistance from the Televinken IT Team
+Icon=/usr/share/icons/Humanity/apps/48/utilities-system-monitor.svg
+
